@@ -15,7 +15,7 @@ var (
 
 func main() {
 	r := mux.NewRouter()
-	r.HandleFunc("/", route.HomeHandler)
+	r.HandleFunc("/", route.HomeHandler).Methods("GET")
 	http.Handle("/", r)
 	http.ListenAndServe(":"+httpPort, handlers.LoggingHandler(os.Stdout, r))
 }

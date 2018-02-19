@@ -1,10 +1,10 @@
 package main
 
 import (
-	"log"
 	"net/http"
 	"os"
 
+	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	route "github.com/unittest-golang/handler"
 )
@@ -17,5 +17,5 @@ func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/", route.HomeHandler)
 	http.Handle("/", r)
-	log.Fatal(http.ListenAndServe(":"+httpPort, r))
+	http.ListenAndServe(":"+httpPort, handlers.LoggingHandler(os.Stdout, r))
 }
